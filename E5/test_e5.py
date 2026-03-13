@@ -3,13 +3,10 @@ from SaludoLexer import SaludoLexer
 from SaludoParser import SaludoParser
 
 def test(input_str):
-    print(f"\n" + "="*30)
     print(f"PRUEBA: '{input_str}'")
-    print("="*30)
     
     input_stream = InputStream(input_str)
     
-    # Lexer
     lexer = SaludoLexer(input_stream)
     token_stream = CommonTokenStream(lexer)
     token_stream.fill()
@@ -20,7 +17,6 @@ def test(input_str):
             token_name = SaludoParser.symbolicNames[token.type]
             print(f"Texto: {token.text:<10} Tipo: {token_name}")
     
-    # Parser
     parser = SaludoParser(token_stream)
     tree = parser.saludo()
     
