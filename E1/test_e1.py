@@ -3,16 +3,31 @@ from NumerosLexer import NumerosLexer
 from NumerosParser import NumerosParser
 
 def test(input_str):
-    print(f"\nPrueba con: '{input_str}'")
+    print(f"\n" + "="*30)
+    print(f"PRUEBA: '{input_str}'")
+    print("="*30)
+    
     input_stream = InputStream(input_str)
+    
+    # Lexer
     lexer = NumerosLexer(input_stream)
     token_stream = CommonTokenStream(lexer)
+    token_stream.fill()
+    
+    print("\nTOKENS GENERADOS:")
+    for token in token_stream.tokens:
+        if token.type != Token.EOF:
+            token_name = NumerosParser.symbolicNames[token.type]
+            print(f"Texto: {token.text:<10} Tipo: {token_name}")
+    
+    # Parser
     parser = NumerosParser(token_stream)
     tree = parser.numero()
-    print(f"Resultado: {tree.toStringTree(recog=parser)}")
+    
+    print("\nÁRBOL SINTÁCTICO:")
+    print(tree.toStringTree(recog=parser))
 
 if __name__ == '__main__':
-    test("5")
-    test("20")
-    test("100")
-    test("3456")
+    inputs = ["5", "20", "100", "3456"]
+    for i in inputs:
+        test(i)
