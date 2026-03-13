@@ -11,7 +11,6 @@ def test(input_str):
     token_stream = CommonTokenStream(lexer)
     token_stream.fill()
     
-    print("\nTOKENS GENERADOS:")
     for token in token_stream.tokens:
         if token.type != Token.EOF:
             token_name = SaludoParser.symbolicNames[token.type]
